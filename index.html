@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- 웹사이트 정보 -->
+    <!-- <title data-bind="META.TITLE"></title>
+    <meta
+      data-bind="META.DESCRIPTION"
+      data-bind-attr="content"
+      name="description"
+    /> -->
+
+    <title data-bind="META.TITLE"></title>
+    <meta name="description" content="예식일 : 05월09일 토요일 오전 11시00분" />
+
+    <meta data-bind="META.KEYWORDS" data-bind-attr="content" name="keywords" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.imweb.me/thumbnail/20240627/9d4c45fd412c5.png"
+      sizes="196x196"
+    />
+
+    <!-- 오픈 그래프 -->
+    <meta property="og:title" content="이승현과 진가영 결혼합니다." />
+    <meta
+      property="og:description"
+      content="예식일 : 05월09일 토요일 오전 11시00분"
+    />
+    <meta
+      property="og:image"
+      content="https://lh3.googleusercontent.com/d/1j0E_Wm13LrMmPUb1QYdRyQl10AG36CxD"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+
+    <!-- 네이버 지도 API -->
+    <script
+      type="text/javascript"
+      src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=8d50jglw6g"
+    ></script>
+
+    <!-- 카카오톡 공유하기 -->
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+      integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- 글꼴 / 스타일 -->
+    <link rel="stylesheet" as="style" href="/index.css" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- 메인 이미지 -->
+    <div class="main-image">
+      <button class="bgm-button" onclick="playAudio()">
+        <img
+          id="btn-icon"
+          alt="재생 버튼"
+          data-bind="BGM.PLAY_IMAGE"
+          data-bind-attr="src"
+        />
+      </button>
+
+      <audio
+        id="bgm"
+        data-bind="BGM.AUDIO"
+        data-bind-attr="src"
+        autoplay=""
+        loop=""
+        preload="auto"
+      ></audio>
+
+      <!-- <img data-bind="IMAGES.MAIN" data-bind-attr="src" alt="메인 이미지" /> -->
+      <img src="/assets/images/img_main.png" alt="메인 이미지" />
+    </div>
+
+    <!-- SAVE THE DATE 이미지 -->
+    <div class="image" style="margin: 80px 0 10px">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1876 727"
+        aria-label="WEDDING DAY"
+        style="height: 50px; color: var(--main-color)"
+      >
+        <g class="svg-main" transform="translate(-23 -45)">
+          <ellipse
+            cx="938"
+            cy="363.5"
+            rx="938"
+            ry="363.5"
+            transform="translate(23 45)"
+            fill="#000"
+          />
+
+          <g
+            transform="translate(100 98)"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="10"
+          >
+            <ellipse cx="860.5" cy="310.5" rx="860.5" ry="310.5" />
+            <ellipse cx="860.5" cy="310.5" rx="855.5" ry="305.5" />
+          </g>
+
+          <text
+            x="51%"
+            y="50%"
+            font-size="160"
+            font-family="MapoAgap"
+            fill="currentColor"
+            stroke="currentColor"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            dy="0.35em"
+          >
+            WEDDING DAY
+          </text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 날짜 및 장소 -->
+    <div class="wedding-info">
+      <p data-bind="WEDDING.DATE.TEXT"></p>
+      <p data-bind="WEDDING.PLACE"></p>
+      <p data-bind="WEDDING.ADDRESS"></p>
+    </div>
+
+    <!-- 손글씨 이미지 -->
+    <div class="image" style="margin-bottom: 55px">
+      <!-- <img
+        data-bind="IMAGES.HANDWRITE"
+        data-bind-attr="src"
+        alt="손글씨 이미지"
+        style="width: 80%;"
+      /> -->
+
+      <img
+        alt="손글씨 이미지"
+        style="width: 80%; background-color: #cccccc; height: 200px"
+      />
+    </div>
+
+    <!-- 편지지 이미지 -->
+    <div class="image" style="margin-bottom: 70px">
+      <div class="envelope-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 336 203"
+          class="envelope-base"
+        >
+          <rect
+            class="env-col"
+            x="15.19"
+            y="15.12"
+            width="305.12"
+            height="172.78"
+          />
+        </svg>
+
+        <svg
+          class="drop-shadow"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 337 204"
+        >
+          <path
+            class="env-cls-3"
+            d="M321.5,15.4c-7.32,1.46-16.37,2.43-23.27,4.86-6.89,2.43-14.65,6.32-21.54,10.21-6.89,3.89-71.52,45.2-76.26,48.12-4.74,2.92-11.45,6.56-11.45,14.1,0,7.53,1.54,11.9,9.3,17.49,7.76,5.59,74.54,60.27,84.45,64.88,9.91,4.62,14.22,6.08,19.39,7.78,5.17,1.7,19.39,5.35,19.39,5.35V15.4Z"
+          />
+        </svg>
+
+        <svg
+          class="drop-shadow"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 337 204"
+        >
+          <path
+            class="env-cls-2"
+            d="M15.95,15.4c7.32,1.46,16.37,2.43,23.27,4.86,6.89,2.43,14.65,6.32,21.54,10.21,6.89,3.89,71.52,45.2,76.26,48.12,4.74,2.92,11.45,6.56,11.45,14.1s-1.54,11.9-9.3,17.49c-7.76,5.59-74.54,60.27-84.45,64.88-9.91,4.62-14.22,6.08-19.39,7.78-5.17,1.7-19.39,5.35-19.39,5.35V15.4Z"
+          />
+        </svg>
+
+        <svg
+          class="drop-shadow"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 337 204"
+        >
+          <path
+            class="env-cls-4"
+            d="M16.01,188.18s2.62-10.79,5.24-14.07c2.62-3.28,10.04-9.62,14.4-12.67,4.36-3.05,85.97-63.81,88.15-65.92s6.98-4.46,11.78-4.46h33.17s28.37,0,33.17,0,9.6,2.35,11.78,4.46c2.18,2.11,83.79,62.87,88.15,65.92s11.78,9.38,14.4,12.67c2.62,3.28,5.24,14.07,5.24,14.07H16.01Z"
+          />
+        </svg>
+
+        <svg
+          class="drop-shadow"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 337 129"
+        >
+          <path
+            class="env-col"
+            d="M315.56,31.71c-7.51,4.88-106.35,67.51-114.69,72.68s-15.01,8.62-32.11,8.62-23.77-3.45-32.11-8.62c-8.34-5.17-107.19-67.8-114.69-72.68-7.51-4.88-5.84-9.77-5.84-15.8h305.3c0,6.03,1.67,10.92-5.84,15.8Z"
+          />
+        </svg>
+
+        <div class="envelope-text">
+          <span>2026.05.09 SAT</span>
+          <span>11:00 AM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 신랑신부 정보 -->
+    <div class="couple-info">
+      <div class="person">
+        <strong>Groom</strong>
+        <p data-bind="COUPLE.GROOM"></p>
+      </div>
+      <div class="person">
+        <strong>Bride</strong>
+        <p data-bind="COUPLE.BRIDE"></p>
+      </div>
+    </div>
+
+    <!-- 신랑신부 이미지 -->
+    <!-- <div class="image">
+      <img
+        data-bind="IMAGES.COUPLE1"
+        data-bind-attr="src"
+        alt="신랑신부 이미지"
+      />
+    </div> -->
+
+    <!-- 부모님 정보 -->
+    <div class="parents-info">
+      <div class="parent-section">
+        <strong>Groom's Parents</strong>
+        <!-- <img
+          data-bind="IMAGES.GROOM_PARENTS"
+          data-bind-attr="src"
+          alt="신랑 부모님"
+        /> -->
+        <img alt="신랑 부모님" src="/assets/images/img_parents1.png" />
+        <div class="parents-name" style="bottom: 20px; left: 200px">
+          <strong>이동재 & 김영식</strong>의<br />
+          아들 승현
+        </div>
+      </div>
+      <div class="parent-section" style="margin-top: 70px">
+        <strong>Bride's Parents</strong>
+        <!-- <img
+          data-bind="IMAGES.BRIDE_PARENTS"
+          data-bind-attr="src"
+          alt="신랑 부모님"
+        /> -->
+        <img alt="신부 부모님" src="/assets/images/img_parents2.png" />
+        <div class="parents-name" style="bottom: 55px; right: 200px">
+          <strong>진광석 & 김경미</strong>의<br />
+          딸 가영
+        </div>
+      </div>
+    </div>
+
+    <!-- 비디오 -->
+    <!-- <div id="videoSection" class="video">
+      <span class="show-btn" onclick="playVideo()" id=""><i></i></span>
+      <img
+        data-bind="IMAGES.VIDEO_IMAGE"
+        data-bind-attr="src"
+        alt="비디오 이미지"
+      />
+    </div> -->
+
+    <!-- 신랑신부 정보2 -->
+    <div class="couple-info2">
+      <div class="image">
+        <img
+          data-bind="IMAGES.COUPLE2"
+          data-bind-attr="src"
+          alt="신랑신부 이미지"
+          style="background-color: #cccccc; height: 555px"
+        />
+      </div>
+      <div class="image" style="margin-top: 40px">
+        <img
+          data-bind="IMAGES.COUPLE3"
+          data-bind-attr="src"
+          alt="신랑신부 이미지"
+          style="background-color: #cccccc; height: 555px"
+        />
+      </div>
+    </div>
+
+    <!-- 갤러리 -->
+    <div class="gallery">
+      <div class="gallery-grid" id="galleryPreview"></div>
+    </div>
+
+    <!-- 달력 -->
+    <div class="calendar">
+      <div class="calendar-header">
+        <div class="calendar-date" id="calendarDate"></div>
+        <div class="calendar-time" id="calendarTime"></div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <!-- 지도 -->
+    <div class="map-section">
+      <div class="image" style="margin: 5px 0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1876 727"
+          aria-label="오시는 길"
+          style="height: 50px; color: #fff"
+        >
+          <g class="svg-main" transform="translate(-23 -45)">
+            <ellipse
+              cx="938"
+              cy="363.5"
+              rx="938"
+              ry="363.5"
+              transform="translate(23 45)"
+              fill="var(--main-color)"
+            />
+
+            <g
+              transform="translate(100 98)"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="10"
+            >
+              <ellipse cx="860.5" cy="310.5" rx="860.5" ry="310.5" />
+              <ellipse cx="860.5" cy="310.5" rx="855.5" ry="305.5" />
+            </g>
+
+            <text
+              x="52%"
+              y="50%"
+              font-size="215"
+              font-family="Pretendard"
+              fill="currentColor"
+              stroke="currentColor"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              dy="0.35em"
+            >
+              오시는 길
+            </text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="map-container" id="map"></div>
+
+      <div class="location-info">
+        <span style="margin: 10px 0; display: inline-block">
+          <p data-bind="WEDDING.ADDRESS"></p>
+          <p data-bind="WEDDING.PLACE" style="font-weight: bold"></p>
+        </span>
+        <button class="copy-btn" onclick="copyAddress()">복사하기</button>
+      </div>
+
+      <div style="margin-top: 10px; padding: 0 20px">
+        <div class="divider"></div>
+      </div>
+
+      <div class="transportation">
+        <strong>🚎 버스</strong>
+        <span data-bind="TRANSPORT.BUS"></span>
+
+        <strong>🚊 지하철</strong>
+        <span data-bind="TRANSPORT.SUBWAY"></span>
+
+        <strong>🚖 자차</strong>
+        <span data-bind="TRANSPORT.EXPRESS"></span>
+      </div>
+    </div>
+
+    <!-- 계좌번호 -->
+    <div class="account">
+      <div class="image" style="margin: 5px 0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1876 727"
+          aria-label="마음 전하실 곳"
+          style="height: 50px; color: #fff"
+        >
+          <g class="svg-main" transform="translate(-23 -45)">
+            <ellipse
+              cx="938"
+              cy="363.5"
+              rx="938"
+              ry="363.5"
+              transform="translate(23 45)"
+              fill="var(--main-color)"
+            />
+
+            <g
+              transform="translate(100 98)"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="10"
+            >
+              <ellipse cx="860.5" cy="310.5" rx="860.5" ry="310.5" />
+              <ellipse cx="860.5" cy="310.5" rx="855.5" ry="305.5" />
+            </g>
+
+            <text
+              x="51%"
+              y="50%"
+              font-size="215"
+              font-family="Pretendard"
+              fill="currentColor"
+              stroke="currentColor"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              dy="0.35em"
+            >
+              마음 전하실 곳
+            </text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="account-section" id="accountSection"></div>
+    </div>
+
+    <!-- 공유 버튼 -->
+    <div class="share-section">
+      <button id="kakaoShare" class="kakao-btn" onclick="shareKakao()">
+        카카오톡 공유하기
+      </button>
+      <button class="url-btn" onclick="copyUrl()">청첩장 주소 복사하기</button>
+      <!-- <div class="footer"><p>ⓒweddingpeach</p></div> -->
+    </div>
+
+    <!-- 이미지 모달 -->
+    <div class="lightbox-modal" id="lightboxModal">
+      <div class="lightbox-head">
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+        <button class="lightbox-close" id="lightboxClose" aria-label="닫기" />
+      </div>
+
+      <div class="lightbox-image-container">
+        <div class="lightbox-loading" id="lightboxLoading"></div>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="" />
+
+        <div class="lightbox-nav">
+          <button class="lightbox-prev" id="lightboxPrev" aria-label="이전" />
+          <button class="lightbox-next" id="lightboxNext" aria-label="다음" />
+        </div>
+      </div>
+
+      <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+    </div>
+
+    <!-- 설문연결 -->
+    <!-- <button class="rsvp-btn" id="attend-btn" onclick="openRSVP()">
+      참석여부 전달하기
+    </button> -->
+  </body>
+
+  <script type="text/javascript" src="/data.js"></script>
+  <script type="text/javascript" src="/index.js"></script>
+</html>
