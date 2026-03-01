@@ -428,7 +428,7 @@ function shareKakao() {
       title: "이승현과 진가영 결혼합니다.🤵🏻‍♂️👰🏻‍♀️",
       description: "예식일 : 05월 09일 토요일 오전 11시00분",
       imageUrl:
-        "https://cdn.imweb.me/upload/S20240430d137232320071/c59e87e090dca.png",
+        "https://lh3.googleusercontent.com/d/1j0E_Wm13LrMmPUb1QYdRyQl10AG36CxD",
       link: {
         mobileWebUrl: window.location.href,
         webUrl: window.location.href,
