@@ -324,11 +324,33 @@ function createAccountGroup(titleText, accounts) {
 
   const title = document.createElement("div");
   title.className = "title";
-  title.textContent = titleText;
+  const titleLabel = document.createElement("span");
+  titleLabel.textContent = titleText;
+
+  const arrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  arrow.setAttribute("width", "24");
+  arrow.setAttribute("height", "24");
+  arrow.setAttribute("viewBox", "0 0 24 24");
+  arrow.setAttribute("fill", "none");
+  arrow.setAttribute("stroke-width", "1.5");
+  arrow.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  arrow.setAttribute("color", "#000000");
+  arrow.classList.add("account-title-arrow");
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", "M6 9L12 15L18 9");
+  path.setAttribute("stroke", "#000000");
+  path.setAttribute("stroke-width", "1.5");
+  path.setAttribute("stroke-linecap", "round");
+  path.setAttribute("stroke-linejoin", "round");
+  arrow.appendChild(path);
+
+  title.appendChild(titleLabel);
+  title.appendChild(arrow);
 
   const content = document.createElement("div");
   content.className = "account-content";
-  if (!open) content.style.display = "none";
+  content.style.display = "none";
 
   title.onclick = () => {
     const isOpen = content.style.display === "block";
@@ -403,9 +425,10 @@ function shareKakao() {
     container: "#kakaoShare",
     objectType: "feed",
     content: {
-      title: WEDDING_DATA.META.TITLE,
-      description: WEDDING_DATA.META.DESCRIPTION,
-      imageUrl: WEDDING_DATA.META.OG_IMAGE,
+      title: "이승현과 진가영 결혼합니다.🤵🏻‍♂️👰🏻‍♀️",
+      description: "예식일 : 05월 09일 토요일 오전 11시00분",
+      imageUrl:
+        "https://cdn.imweb.me/upload/S20240430d137232320071/c59e87e090dca.png",
       link: {
         mobileWebUrl: window.location.href,
         webUrl: window.location.href,

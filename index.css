@@ -380,6 +380,18 @@ img {
   margin: 10px 0;
   border-bottom: 1px solid #000;
   line-height: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.account-title-arrow {
+  transition: transform 0.2s ease;
+}
+
+.account-group.open .account-title-arrow {
+  transform: rotate(180deg);
 }
 
 .account-row {
