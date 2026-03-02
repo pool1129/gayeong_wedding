@@ -87,7 +87,6 @@
         preload="auto"
       ></audio>
 
-      <!-- <img data-bind="IMAGES.MAIN" data-bind-attr="src" alt="메인 이미지" /> -->
       <img src="/assets/images/img_main.png" alt="메인 이미지" />
     </div>
 
@@ -145,16 +144,10 @@
 
     <!-- 손글씨 이미지 -->
     <div class="image" style="margin-bottom: 55px">
-      <!-- <img
-        data-bind="IMAGES.HANDWRITE"
-        data-bind-attr="src"
-        alt="손글씨 이미지"
-        style="width: 80%;"
-      /> -->
-
       <img
         alt="손글씨 이미지"
-        style="width: 80%; background-color: #cccccc; height: 200px"
+        style="width: 80%"
+        src="/assets/images/img_handwrite.png"
       />
     </div>
 
@@ -238,71 +231,51 @@
       </div>
     </div>
 
-    <!-- 신랑신부 이미지 -->
-    <!-- <div class="image">
-      <img
-        data-bind="IMAGES.COUPLE1"
-        data-bind-attr="src"
-        alt="신랑신부 이미지"
-      />
-    </div> -->
-
     <!-- 부모님 정보 -->
     <div class="parents-info">
       <div class="parent-section">
         <strong>Groom's Parents</strong>
-        <!-- <img
-          data-bind="IMAGES.GROOM_PARENTS"
-          data-bind-attr="src"
-          alt="신랑 부모님"
-        /> -->
+
         <img alt="신랑 부모님" src="/assets/images/img_parents1.png" />
-        <div class="parents-name" style="bottom: 20px; left: 200px">
-          <strong>이동재 & 김영식</strong>의<br />
-          아들 승현
-        </div>
       </div>
       <div class="parent-section" style="margin-top: 70px">
         <strong>Bride's Parents</strong>
-        <!-- <img
-          data-bind="IMAGES.BRIDE_PARENTS"
-          data-bind-attr="src"
-          alt="신랑 부모님"
-        /> -->
+
         <img alt="신부 부모님" src="/assets/images/img_parents2.png" />
-        <div class="parents-name" style="bottom: 55px; right: 200px">
-          <strong>진광석 & 김경미</strong>의<br />
-          딸 가영
-        </div>
       </div>
     </div>
 
-    <!-- 비디오 -->
-    <!-- <div id="videoSection" class="video">
-      <span class="show-btn" onclick="playVideo()" id=""><i></i></span>
-      <img
-        data-bind="IMAGES.VIDEO_IMAGE"
-        data-bind-attr="src"
-        alt="비디오 이미지"
-      />
-    </div> -->
-
     <!-- 신랑신부 정보2 -->
     <div class="couple-info2">
-      <div class="image">
+      <div class="image" style="height: 555px; position: relative">
+        <img alt="신랑신부 이미지" src="/assets/images/img_couple3.jpeg" />
         <img
-          data-bind="IMAGES.COUPLE2"
-          data-bind-attr="src"
           alt="신랑신부 이미지"
-          style="background-color: #cccccc; height: 555px"
+          src="/assets/images/img_couple3_hand.png"
+          style="
+            position: absolute;
+            width: 60%;
+            top: 50px;
+            left: 24px;
+            transform: rotate(-5deg);
+          "
         />
       </div>
-      <div class="image" style="margin-top: 40px">
+      <div
+        class="image"
+        style="height: 555px; position: relative; margin-top: 40px"
+      >
+        <img alt="신랑신부 이미지" src="/assets/images/img_couple2.jpeg" />
         <img
-          data-bind="IMAGES.COUPLE3"
-          data-bind-attr="src"
           alt="신랑신부 이미지"
-          style="background-color: #cccccc; height: 555px"
+          src="/assets/images/img_couple2_hand.png"
+          style="
+            position: absolute;
+            width: 70%;
+            top: 40px;
+            right: 15px;
+            transform: rotate(8deg);
+          "
         />
       </div>
     </div>
@@ -470,11 +443,6 @@
 
       <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
     </div>
-
-    <!-- 설문연결 -->
-    <!-- <button class="rsvp-btn" id="attend-btn" onclick="openRSVP()">
-      참석여부 전달하기
-    </button> -->
   </body>
 
   <script type="text/javascript" src="/data.js"></script>
