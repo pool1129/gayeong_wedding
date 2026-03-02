@@ -76,6 +76,17 @@ img {
   z-index: 9999;
 }
 
+.bgm-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.is-hidden {
+  display: none !important;
+}
+
 /* 메인 이미지 */
 .main-image {
   position: relative;
@@ -262,6 +273,57 @@ img {
   margin: 0 auto;
 }
 
+.calendar-dday {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+  word-break: keep-all;
+}
+
+.calendar-dday strong {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--main-color);
+}
+
+.dday-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dday-item {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 10px !important;
+  letter-spacing: 0;
+  line-height: 1rem;
+  text-transform: uppercase;
+  background-color: #fff;
+  border-radius: 5px;
+  padding-top: 8px;
+}
+
+.calendar-dday .card {
+  font-size: 1.3rem !important;
+  line-height: 32px;
+  width: 2rem;
+  border-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.calendar-dday .desc {
+  padding: 0 0 8px;
+  /* background: var(--third-bg-color); */
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  /* color: var(--subtitle-text-color); */
+}
+
 .day-header {
   text-align: center;
   font-size: 12px;
@@ -303,7 +365,7 @@ img {
 
 .location-info {
   padding: 0 20px;
-  margin: 0 0 20px;
+  margin: 0 0 12px;
   overflow: hidden;
 }
 
@@ -322,6 +384,34 @@ img {
   margin-top: 12px;
   float: right;
   line-height: 24px;
+}
+
+.location-nav-buttons {
+  padding: 0 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.location-nav-btn {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--main-color);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+
+.location-nav-btn img {
+  width: 16px;
+}
+
+.location-nav-btn span {
+  color: #181818;
 }
 
 .divider {

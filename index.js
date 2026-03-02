@@ -32,8 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
     WEDDING_DATA.WEDDING.FONT_COLOR,
   );
 
+  initBgm();
   initMap();
 });
+
+let countdownTimer = null;
 
 // 결혼식 날짜 설정
 const WEDDING_DATE = WEDDING_DATA.WEDDING.DATE;
@@ -54,6 +57,108 @@ function generateCalendar() {
   document.getElementById("calendarTime").textContent = WEDDING_TIME;
 
   renderCalendar(year, month, day);
+  renderDday();
+}
+
+// 예식일 Date 객체 생성(디데이 계산용)
+function getWeddingDateTime() {
+  const weddingDate = getWeddingDateString();
+  const weddingTime = getWeddingTimeString();
+  const [year, month, day] = weddingDate.split("-").map(Number);
+  const match = String(weddingTime)
+    .trim()
+    .match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+
+  let hours = 12;
+  let minutes = 0;
+
+  if (match) {
+    hours = Number(match[1]);
+    minutes = Number(match[2]);
+    const period = (match[3] || "").toUpperCase();
+
+    if (period === "PM" && hours < 12) hours += 12;
+    if (period === "AM" && hours === 12) hours = 0;
+  }
+
+  return new Date(year, month - 1, day, hours, minutes, 0);
+}
+
+// 예식 날짜 문자열(YYYY-MM-DD)을 안전하게 계산
+function getWeddingDateString() {
+  const wedding = WEDDING_DATA.WEDDING || {};
+  if (wedding.DATE) return wedding.DATE;
+
+  const text = String(wedding.DATE_TIME_TEXT || "");
+  const match = text.match(/(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/);
+  if (match) {
+    const [, y, m, d] = match;
+    return `${y}-${String(Number(m)).padStart(2, "0")}-${String(Number(d)).padStart(2, "0")}`;
+  }
+
+  return "2026-06-20";
+}
+
+// 예식 시간 문자열(HH:MMAM/PM)을 안전하게 계산
+function getWeddingTimeString() {
+  const wedding = WEDDING_DATA.WEDDING || {};
+  if (wedding.TIME) return String(wedding.TIME);
+
+  const text = String(wedding.DATE_TIME_TEXT || "");
+  const match = text.match(/(\d{1,2}:\d{2}\s*(?:AM|PM)?)/i);
+  if (match?.[1]) {
+    return match[1].replace(/\s+/g, "").toUpperCase();
+  }
+
+  return "12:00PM";
+}
+
+// 디데이(일/시/분/초) 카운트다운 렌더 및 타이머 등록
+function renderDday() {
+  const ddayEl = document.getElementById("calendarDday");
+  if (!ddayEl) return;
+
+  const weddingDateTime = getWeddingDateTime();
+
+  const update = () => {
+    const now = new Date();
+    // 예식 전/후 모두 양수 카운트다운으로 표시
+    let diffSeconds = Math.floor(
+      Math.abs(weddingDateTime.getTime() - now.getTime()) / 1000,
+    );
+
+    const days = Math.floor(diffSeconds / (60 * 60 * 24));
+    diffSeconds %= 60 * 60 * 24;
+    const hours = Math.floor(diffSeconds / (60 * 60));
+    diffSeconds %= 60 * 60;
+    const minutes = Math.floor(diffSeconds / 60);
+    const seconds = diffSeconds % 60;
+
+    ddayEl.innerHTML = `
+      <div class="dday-grid">
+        <div class="dday-item">
+          <span class="card">${days}</span>
+          <div class="desc">Day</div>
+        </div>
+        <div class="dday-item">
+          <span class="card">${String(hours).padStart(2, "0")}</span>
+          <div class="desc">Hour</div>
+        </div>
+        <div class="dday-item">
+          <span class="card">${String(minutes).padStart(2, "0")}</span>
+          <div class="desc">Min</div>
+        </div>
+        <div class="dday-item">
+          <span class="card">${String(seconds).padStart(2, "0")}</span>
+          <div class="desc">Sec</div>
+        </div>
+      </div>
+    `;
+  };
+
+  update();
+  clearInterval(countdownTimer);
+  countdownTimer = setInterval(update, 1000);
 }
 
 function renderCalendar(year, month, selectedDay) {
@@ -162,7 +267,7 @@ function initGalleryPreview() {
     const img = document.createElement("img");
     img.src = src;
     img.alt = `이미지 ${index + 1}`;
-    img.onclick = () => openLightbox(index);
+    // img.onclick = () => openLightbox(index);
 
     div.appendChild(img);
     galleryPreview.appendChild(div);
@@ -459,6 +564,53 @@ function copyAddress() {
     .then(() => alert("주소가 복사되었습니다."));
 }
 
+function openMapLink(appUrl, webUrl) {
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (!isMobile) {
+    window.open(webUrl, "_blank");
+    return;
+  }
+
+  const start = Date.now();
+  window.location.href = appUrl;
+
+  setTimeout(() => {
+    if (Date.now() - start < 1800) {
+      window.open(webUrl, "_blank");
+    }
+  }, 1200);
+}
+
+function openNaverMap() {
+  const { LAT, LNG } = WEDDING_DATA.WEDDING;
+  const placeKeyword = "더채플앳대치";
+  const appName = encodeURIComponent(window.location.hostname || "wedding");
+  const placeName = encodeURIComponent(placeKeyword);
+
+  const appUrl = `nmap://route/public?dlat=${LAT}&dlng=${LNG}&dname=${placeName}&appname=${appName}`;
+  const webUrl = `https://map.naver.com/v5/search/${placeName}`;
+  openMapLink(appUrl, webUrl);
+}
+
+function openKakaoNavi() {
+  const { PLACE, LAT, LNG } = WEDDING_DATA.WEDDING;
+  const placeName = encodeURIComponent(PLACE);
+
+  const appUrl = `kakaonavi://navigate?name=${placeName}&x=${LNG}&y=${LAT}&coord_type=wgs84`;
+  const webUrl = `https://map.kakao.com/link/to/${placeName},${LAT},${LNG}`;
+  openMapLink(appUrl, webUrl);
+}
+
+function openTmap() {
+  const { LAT, LNG } = WEDDING_DATA.WEDDING;
+  const placeKeyword = "더채플앳대치";
+  const placeName = encodeURIComponent(placeKeyword);
+
+  const appUrl = `tmap://route?goalx=${LNG}&goaly=${LAT}&goalname=${placeName}`;
+  const webUrl = `https://map.naver.com/v5/search/${placeName}`;
+  openMapLink(appUrl, webUrl);
+}
+
 function copyAccount(account) {
   navigator.clipboard
     .writeText(account)
@@ -466,11 +618,33 @@ function copyAccount(account) {
 }
 
 // bgm 재생하기
-let isPlaying = false;
+function updateBgmButton(isPlaying) {
+  const playIcon = document.querySelector(".bgm-icon-play");
+  const stopIcon = document.querySelector(".bgm-icon-stop");
+
+  if (!playIcon || !stopIcon) return;
+
+  playIcon.classList.toggle("is-hidden", !isPlaying);
+  stopIcon.classList.toggle("is-hidden", isPlaying);
+}
+
+function initBgm() {
+  const audio = document.getElementById("bgm");
+  if (!audio?.src) return;
+
+  audio.addEventListener("play", () => updateBgmButton(true));
+  audio.addEventListener("pause", () => updateBgmButton(false));
+  audio.addEventListener("ended", () => updateBgmButton(false));
+
+  // 처음 로드 시 재생 시도
+  audio
+    .play()
+    .then(() => updateBgmButton(true))
+    .catch(() => updateBgmButton(false));
+}
 
 function playAudio() {
   const audio = document.getElementById("bgm");
-  const icon = document.getElementById("btn-icon");
 
   if (!audio.src) {
     console.warn("BGM src가 아직 없습니다");
@@ -481,10 +655,8 @@ function playAudio() {
     audio.play().catch((err) => {
       console.error("재생 실패:", err);
     });
-    icon.src = WEDDING_DATA.BGM.STOP_IMAGE;
   } else {
     audio.pause();
-    icon.src = WEDDING_DATA.BGM.PLAY_IMAGE;
   }
 }
 

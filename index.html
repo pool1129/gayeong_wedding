@@ -69,19 +69,73 @@
   <body>
     <!-- 메인 이미지 -->
     <div class="main-image">
-      <button class="bgm-button" onclick="playAudio()">
-        <img
-          id="btn-icon"
-          alt="재생 버튼"
-          data-bind="BGM.PLAY_IMAGE"
-          data-bind-attr="src"
-        />
+      <button
+        class="bgm-button"
+        id="bgmButton"
+        type="button"
+        onclick="playAudio()"
+      >
+        <!-- 재생 -->
+        <svg
+          class="bgm-icon bgm-icon-play"
+          width="18px"
+          height="18px"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          color="#FFF"
+        >
+          <path
+            d="M1 13.8571V10.1429C1 9.03829 1.89543 8.14286 3 8.14286H5.9C6.09569 8.14286 6.28708 8.08544 6.45046 7.97772L12.4495 4.02228C13.1144 3.5839 14 4.06075 14 4.85714V19.1429C14 19.9392 13.1144 20.4161 12.4495 19.9777L6.45046 16.0223C6.28708 15.9146 6.09569 15.8571 5.9 15.8571H3C1.89543 15.8571 1 14.9617 1 13.8571Z"
+            stroke="#FFF"
+            stroke-width="1.5"
+          ></path>
+          <path
+            d="M17.5 7.5C17.5 7.5 19 9 19 11.5C19 14 17.5 15.5 17.5 15.5"
+            stroke="#FFF"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M20.5 4.5C20.5 4.5 23 7 23 11.5C23 16 20.5 18.5 20.5 18.5"
+            stroke="#FFF"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+
+        <!-- 정지 -->
+        <svg
+          class="bgm-icon bgm-icon-stop is-hidden"
+          width="18px"
+          height="18px"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          color="#FFF"
+        >
+          <path
+            d="M18 14L20.0005 12M22 10L20.0005 12M20.0005 12L18 10M20.0005 12L22 14"
+            stroke="#FFF"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M2 13.8571V10.1429C2 9.03829 2.89543 8.14286 4 8.14286H6.9C7.09569 8.14286 7.28708 8.08544 7.45046 7.97772L13.4495 4.02228C14.1144 3.5839 15 4.06075 15 4.85714V19.1429C15 19.9392 14.1144 20.4161 13.4495 19.9777L7.45046 16.0223C7.28708 15.9146 7.09569 15.8571 6.9 15.8571H4C2.89543 15.8571 2 14.9617 2 13.8571Z"
+            stroke="#FFF"
+            stroke-width="1.5"
+          ></path>
+        </svg>
       </button>
 
       <audio
         id="bgm"
-        data-bind="BGM.AUDIO"
-        data-bind-attr="src"
+        src="/assets/bgm.mp3"
         autoplay=""
         loop=""
         preload="auto"
@@ -146,7 +200,7 @@
     <div class="image" style="margin-bottom: 55px">
       <img
         alt="손글씨 이미지"
-        style="width: 80%"
+        style="width: 70%"
         src="/assets/images/img_handwrite.png"
       />
     </div>
@@ -292,6 +346,7 @@
         <div class="calendar-time" id="calendarTime"></div>
       </div>
       <div class="calendar-grid" id="calendarGrid"></div>
+      <div class="calendar-dday" id="calendarDday"></div>
     </div>
 
     <!-- 지도 -->
@@ -348,6 +403,19 @@
           <p data-bind="WEDDING.PLACE" style="font-weight: bold"></p>
         </span>
         <button class="copy-btn" onclick="copyAddress()">복사하기</button>
+      </div>
+      <div class="location-nav-buttons">
+        <button class="location-nav-btn" onclick="openNaverMap()">
+          <img src="/assets/icon_navermap.png" />
+          <span>네이버 지도</span>
+        </button>
+        <button class="location-nav-btn" onclick="openKakaoNavi()">
+          <img src="/assets/icon_kakaonavi.png" />
+          <span>카카오 네비</span>
+        </button>
+        <button class="location-nav-btn" onclick="openTmap()">
+          <img src="/assets/icon_tmap.png" /> <span>티맵</span>
+        </button>
       </div>
 
       <div style="margin-top: 10px; padding: 0 20px">
