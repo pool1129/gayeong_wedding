@@ -219,9 +219,29 @@ img {
 }
 
 /* 갤러리 */
+.gallery {
+  text-align: center;
+  padding-bottom: 40px;
+  background-color: #fff;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery-more-btn {
+  display: block;
+  margin: 20px auto 0;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+  cursor: pointer;
+  text-align: center;
+  padding: 5px 20px;
+  border-radius: 25px;
+  font-size: 13px;
+  line-height: 24px;
+  background-color: #fff;
 }
 
 .gallery-thumb {
@@ -697,15 +717,15 @@ img {
 }
 
 .lightbox-nav button {
-  background-color: transparent;
   color: #fff;
   opacity: 0.3;
   font-weight: 300;
   transition: opacity 0.3s;
-  font-size: 24px;
-  line-height: 27px;
+  font-size: 20px;
   width: 40px;
   height: 40px;
+  background-color: #ffffff1c;
+  border-radius: 20px;
 }
 
 .lightbox-nav button:hover {
@@ -891,4 +911,80 @@ img {
 .envelope-text span {
   font-size: 10px;
   font-weight: 500;
+}
+
+/* 안내사항 */
+.notice-tab-wrap {
+  padding: 60px 0;
+  background-color: #fff;
+}
+
+.notice-tabs {
+  margin: 40px 0 0;
+  display: grid;
+  /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.notice-tab-btn.active {
+  border-color: #fff;
+  border: 1px solid var(--main-color);
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #fff;
+  position: relative;
+  z-index: 9999;
+  bottom: -1px;
+  font-weight: 600;
+}
+
+.notice-tab-btn {
+  color: #363538;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 8px 4px;
+  line-height: 1.5;
+  position: relative;
+  background-color: #fff;
+}
+
+.notice-tab-btn::after {
+  position: absolute;
+  right: -1px;
+  top: 25%;
+  display: inline-block;
+  width: 1px;
+  height: 50%;
+  content: "";
+  background: var(--main-light);
+  z-index: 999;
+}
+
+.notice-tab-btn:last-child::after {
+  display: none;
+}
+
+.notice-tab-wrap:has(.notice-tab-btn:first-child.active) .notice-content {
+  border-top-left-radius: 0;
+}
+
+.notice-content {
+  border: 1px solid var(--main-color);
+  background: #fff;
+  overflow: hidden;
+  padding: 32px 24px;
+  border-radius: 5px;
+}
+
+.notice-content-text {
+  /* white-space: pre-line; */
+  text-align: center;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #444;
+}
+
+.notice-tab-wrap:has(.notice-tab-btn:last-child.active) .notice-content {
+  border-top-right-radius: 0;
 }

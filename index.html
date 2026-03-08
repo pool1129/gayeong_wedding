@@ -200,7 +200,7 @@
     <div class="image" style="margin-bottom: 55px">
       <img
         alt="손글씨 이미지"
-        style="width: 70%"
+        style="width: 80%"
         src="/assets/images/img_handwrite.png"
       />
     </div>
@@ -301,24 +301,21 @@
 
     <!-- 신랑신부 정보2 -->
     <div class="couple-info2">
-      <div class="image" style="height: 555px; position: relative">
+      <div class="image" style="position: relative">
         <img alt="신랑신부 이미지" src="/assets/images/img_couple3.jpeg" />
         <img
           alt="신랑신부 이미지"
           src="/assets/images/img_couple3_hand.png"
           style="
             position: absolute;
-            width: 60%;
-            top: 50px;
+            width: 65%;
+            top: 65px;
             left: 24px;
             transform: rotate(-5deg);
           "
         />
       </div>
-      <div
-        class="image"
-        style="height: 555px; position: relative; margin-top: 40px"
-      >
+      <div class="image" style="position: relative; margin-top: 40px">
         <img alt="신랑신부 이미지" src="/assets/images/img_couple2.jpeg" />
         <img
           alt="신랑신부 이미지"
@@ -337,6 +334,9 @@
     <!-- 갤러리 -->
     <div class="gallery">
       <div class="gallery-grid" id="galleryPreview"></div>
+      <button class="gallery-more-btn" id="galleryMoreBtn" type="button">
+        더보기
+      </button>
     </div>
 
     <!-- 달력 -->
@@ -347,6 +347,76 @@
       </div>
       <div class="calendar-grid" id="calendarGrid"></div>
       <div class="calendar-dday" id="calendarDday"></div>
+    </div>
+
+    <!-- 안내사항 -->
+    <div
+      class="notice-tab-wrap padding"
+      style="padding-left: 40px; padding-right: 40px"
+    >
+      <div class="image" style="margin: 5px 0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1876 727"
+          aria-label="안내사항"
+          style="height: 50px; color: #fff"
+        >
+          <g class="svg-main" transform="translate(-23 -45)">
+            <ellipse
+              cx="938"
+              cy="363.5"
+              rx="938"
+              ry="363.5"
+              transform="translate(23 45)"
+              fill="var(--main-color)"
+            ></ellipse>
+
+            <g
+              transform="translate(100 98)"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="10"
+            >
+              <ellipse cx="860.5" cy="310.5" rx="860.5" ry="310.5"></ellipse>
+              <ellipse cx="860.5" cy="310.5" rx="855.5" ry="305.5"></ellipse>
+            </g>
+
+            <text
+              x="52%"
+              y="50%"
+              font-size="215"
+              font-family="Pretendard"
+              fill="currentColor"
+              stroke="currentColor"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              dy="0.35em"
+            >
+              피로연 안내
+            </text>
+          </g>
+        </svg>
+      </div>
+      <div class="notice-tabs" id="noticeTabs">
+        <!-- <button type="button" class="notice-tab-btn active">
+          💍 피로연 안내
+        </button> -->
+        <!-- <button type="button" class="notice-tab-btn">🍽️ 식사안내</button> -->
+        <!-- <button type="button" class="notice-tab-btn">🅿️ 주차안내</button> -->
+      </div>
+      <div class="notice-content" id="noticeContent">
+        <div class="notice-content-text">
+          예식 참석이 어려운 분들을 위해<br />
+          혼례에 앞서 피로연 자리를 마련하였습니다.<br /><br />
+          <strong>혼주</strong> 진광석 · 김경미<br /><br />
+
+          <strong>
+            2026년 05월 02일 토요일 오전 11시<br />
+            철원 태봉 웨딩홀<br />
+          </strong>
+          강원 철원군 서면 와수로 110번안길 18-2
+        </div>
+      </div>
     </div>
 
     <!-- 지도 -->

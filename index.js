@@ -34,9 +34,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initBgm();
   initMap();
+  initNoticeTabs();
 });
 
 let countdownTimer = null;
+const NOTICE_TAB_CONTENTS = [
+  `예식 참석이 어려운 분들을 위해\n 혼례에 앞서 피로연 자리를 마련하였습니다. \n
+  혼주 진광석 · 김경미 \n
+  2026년 05월 02일 토요일 오전 11시 \n
+  철원 태봉 웨딩홀 
+  강원 철원군 서면 와수로 110번안길 18-2`,
+  //   `드레스코드는 세미 포멀입니다.
+  // · 화이트/아이보리 계열 의상은 신부를 위해 피해주시면 감사하겠습니다.`,
+  //   `· 예식: 3F 메인홀
+  // · 식전 웰컴존: 4F 루프탑
+  // · 식사: 예식 후 동일 건물 연회장에서 진행됩니다.`,
+];
 
 // 결혼식 날짜 설정
 const WEDDING_DATE = WEDDING_DATA.WEDDING.DATE;
@@ -194,6 +207,34 @@ function renderCalendar(year, month, selectedDay) {
 
 generateCalendar();
 
+function initNoticeTabs() {
+  const tabs = document.querySelectorAll("#noticeTabs .notice-tab-btn");
+  const content = document.querySelector("#noticeContent .notice-content-text");
+
+  if (!tabs.length || !content) return;
+
+  const setActiveTab = (index) => {
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle("active", i === index);
+      tab.setAttribute("aria-selected", i === index ? "true" : "false");
+    });
+
+    content.textContent =
+      NOTICE_TAB_CONTENTS[index] ?? NOTICE_TAB_CONTENTS[0] ?? "";
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-selected", tab.classList.contains("active"));
+    tab.onclick = () => setActiveTab(index);
+  });
+
+  const initialIndex = [...tabs].findIndex((tab) =>
+    tab.classList.contains("active"),
+  );
+  setActiveTab(initialIndex >= 0 ? initialIndex : 0);
+}
+
 // 네이버 지도 초기화
 function initMap() {
   if (typeof naver === "undefined") return;
@@ -249,6 +290,7 @@ function playVideo() {
 
 // 갤러리
 const images = [...WEDDING_DATA.GALLERY];
+const PREVIEW_LIMIT = 9;
 
 let currentIndex = 0;
 
@@ -258,20 +300,32 @@ const counter = document.getElementById("lightboxCounter");
 const thumbnails = document.getElementById("lightboxThumbnails");
 const loading = document.getElementById("lightboxLoading");
 const galleryPreview = document.getElementById("galleryPreview");
+const galleryMoreBtn = document.getElementById("galleryMoreBtn");
 
 function initGalleryPreview() {
-  images.forEach((src, index) => {
+  galleryPreview.innerHTML = "";
+
+  images.slice(0, PREVIEW_LIMIT).forEach((src, index) => {
     const div = document.createElement("div");
     div.classList = "gallery-thumb";
 
     const img = document.createElement("img");
     img.src = src;
     img.alt = `이미지 ${index + 1}`;
-    // img.onclick = () => openLightbox(index);
+    img.onclick = () => openLightbox(index);
 
     div.appendChild(img);
     galleryPreview.appendChild(div);
   });
+
+  if (!galleryMoreBtn) return;
+
+  if (images.length > PREVIEW_LIMIT) {
+    galleryMoreBtn.style.display = "flex";
+    galleryMoreBtn.onclick = () => openLightbox(PREVIEW_LIMIT);
+  } else {
+    galleryMoreBtn.style.display = "none";
+  }
 }
 
 function initThumbnails() {
