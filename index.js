@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initBgm();
   initMap();
   initNoticeTabs();
+  preventImageSaveActions();
 });
 
 let countdownTimer = null;
@@ -233,6 +234,20 @@ function initNoticeTabs() {
     tab.classList.contains("active"),
   );
   setActiveTab(initialIndex >= 0 ? initialIndex : 0);
+}
+
+function preventImageSaveActions() {
+  document.addEventListener("contextmenu", (event) => {
+    if (event.target instanceof HTMLImageElement) {
+      event.preventDefault();
+    }
+  });
+
+  document.addEventListener("dragstart", (event) => {
+    if (event.target instanceof HTMLImageElement) {
+      event.preventDefault();
+    }
+  });
 }
 
 // 네이버 지도 초기화

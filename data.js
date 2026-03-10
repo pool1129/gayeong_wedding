@@ -116,5 +116,7 @@ const WEDDING_DATA = {
     "https://lh3.googleusercontent.com/d/1oGClHp3J6NkvwspVgPrcdKuUFTs6q_U8",
     "https://lh3.googleusercontent.com/d/1iYDR5Q95z5LREyiSv1unoFRAkf4TXfLB",
     "https://lh3.googleusercontent.com/d/1B9fE1J3-tNt7re1N03E-4ZTyTI4SkQHj",
+    "https://lh3.googleusercontent.com/d/1sVDlgoNHmsPR1sQr5X7qzuoThqi8mIcS",
+    "https://lh3.googleusercontent.com/d/1TcprSSVzrEsKkak3ASC8g9EZAPPlo-D_",
   ],
 };
