@@ -237,6 +237,17 @@ function initNoticeTabs() {
 }
 
 function preventImageSaveActions() {
+  const protectImage = (img) => {
+    img.draggable = false;
+    img.setAttribute("draggable", "false");
+    img.setAttribute("oncontextmenu", "return false;");
+    img.style.webkitTouchCallout = "none";
+    img.style.webkitUserSelect = "none";
+    img.style.userSelect = "none";
+  };
+
+  document.querySelectorAll("img").forEach(protectImage);
+
   document.addEventListener("contextmenu", (event) => {
     if (event.target instanceof HTMLImageElement) {
       event.preventDefault();
@@ -248,6 +259,22 @@ function preventImageSaveActions() {
       event.preventDefault();
     }
   });
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (!(node instanceof Element)) return;
+        if (node instanceof HTMLImageElement) {
+          protectImage(node);
+          return;
+        }
+
+        node.querySelectorAll?.("img").forEach(protectImage);
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 // 네이버 지도 초기화
@@ -323,11 +350,11 @@ function initGalleryPreview() {
   images.slice(0, PREVIEW_LIMIT).forEach((src, index) => {
     const div = document.createElement("div");
     div.classList = "gallery-thumb";
+    div.onclick = () => openLightbox(index);
 
     const img = document.createElement("img");
     img.src = src;
     img.alt = `이미지 ${index + 1}`;
-    img.onclick = () => openLightbox(index);
 
     div.appendChild(img);
     galleryPreview.appendChild(div);
