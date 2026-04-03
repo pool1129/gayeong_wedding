@@ -65,7 +65,7 @@ document.documentElement.classList.add('geo-checking');
 
 const TARGET_LAT = 37.5665;   // 기준 위도
 const TARGET_LNG = 126.9780;  // 기준 경도
-const RADIUS_M = 100;         // 반경(m)
+const RADIUS_M = 300;         // 반경(m)
 
 function toRad(value) {
   return (value * Math.PI) / 180;
