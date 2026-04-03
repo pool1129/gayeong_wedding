@@ -87,7 +87,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
 
 // 위치 확인
 function initCheckLocation() {
-  const targetSection = document.getElementById("gallery");
+  const targetSection = document.querySelector(".gallery");
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
