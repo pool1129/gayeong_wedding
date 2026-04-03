@@ -21,6 +21,10 @@ html {
   width: 100%;
 }
 
+html.geo-checking .gallery-section {
+  display: none !important;
+}
+
 body {
   font-family:
     "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic",
