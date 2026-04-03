@@ -61,9 +61,11 @@ const WEDDING_TIME = WEDDING_DATA.WEDDING.TIME;
 const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 // 특정위치에서는 갤러리 미노출
-const targetLat = 37.56129332113698;
-const targetLng = 126.82541086584348;
-const radius = 100;
+document.documentElement.classList.add('geo-checking');
+
+const TARGET_LAT = 37.5665;   // 기준 위도
+const TARGET_LNG = 126.9780;  // 기준 경도
+const RADIUS_M = 100;         // 반경(m)
 
 function toRad(value) {
   return (value * Math.PI) / 180;
@@ -85,28 +87,68 @@ function getDistance(lat1, lng1, lat2, lng2) {
   return R * c;
 }
 
-// 위치 확인
-function initCheckLocation() {
-  const targetSection = document.querySelector(".gallery");
+function findGallerySection() {
+  // 1순위: gallery-section 클래스가 있으면 그걸 사용
+  let gallery = document.querySelector('.gallery');
+  if (gallery) return gallery;
+
+  // 2순위: "더보기" 버튼이 들어있는 가까운 section 찾기
+  const moreButton = [...document.querySelectorAll('button, a, div, span')]
+    .find(el => el.textContent?.trim() === '더보기');
+
+  if (moreButton) {
+    return moreButton.closest('section, div');
+  }
+
+  return null;
+}
+
+function applyGalleryVisibility() {
+  const gallerySection = findGallerySection();
+  if (!gallerySection) {
+    document.documentElement.classList.remove('geo-checking');
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    gallerySection.style.display = '';
+    document.documentElement.classList.remove('geo-checking');
+    return;
+  }
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const currentLat = position.coords.latitude;
       const currentLng = position.coords.longitude;
 
-      const distance = getDistance(currentLat, currentLng, targetLat, targetLng);
+      const distance = getDistance(
+        currentLat,
+        currentLng,
+        TARGET_LAT,
+        TARGET_LNG
+      );
 
-      if (distance <= radius) {
-        targetSection.style.display='block';
+      if (distance <= RADIUS_M) {
+        gallerySection.style.display = 'none';
       } else {
-        targetSection.style.display='none';
+        gallerySection.style.display = '';
       }
+
+      document.documentElement.classList.remove('geo-checking');
     },
-    (error) => {
-       console.log(error)
+    () => {
+      gallerySection.style.display = '';
+      document.documentElement.classList.remove('geo-checking');
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
     }
   );
 }
+
+document.addEventListener('DOMContentLoaded', applyGalleryVisibility);
 
 function generateCalendar() {
   const [year, month, day] = WEDDING_DATE.split("-").map(Number);
