@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initBgm();
   initMap();
   initNoticeTabs();
+  initCheckLocation()
   preventImageSaveActions();
 });
 
@@ -58,6 +59,54 @@ const WEDDING_TIME = WEDDING_DATA.WEDDING.TIME;
 
 // 달력 생성
 const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+// 특정위치에서는 갤러리 미노출
+const targetLat = 37.56129332113698;
+const targetLng = 126.82541086584348;
+const radius = 100;
+
+function toRad(value) {
+  return (value * Math.PI) / 180;
+}
+
+function getDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371000;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+// 위치 확인
+function initCheckLocation() {
+  const targetSection = document.getElementById("gallery");
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const currentLat = position.coords.latitude;
+      const currentLng = position.coords.longitude;
+
+      const distance = getDistance(currentLat, currentLng, targetLat, targetLng);
+
+      if (distance <= radius) {
+        targetSection.style.display='block';
+      } else {
+        targetSection.style.display='none';
+      }
+    },
+    (error) => {
+       console.log(error)
+    }
+  );
+}
 
 function generateCalendar() {
   const [year, month, day] = WEDDING_DATE.split("-").map(Number);
